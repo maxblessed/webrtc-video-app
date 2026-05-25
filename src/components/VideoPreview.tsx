@@ -1,22 +1,34 @@
-import { Paper } from '@mui/material'
-import { useEffect, useRef } from 'react'
+import { Paper, Typography } from '@mui/material'
+import { useEffect, useState } from 'react'
 
 interface VideoPreviewProps {
   stream: MediaStream | null
+  videoRef: React.RefObject<HTMLVideoElement | null>
 }
 
-const VideoPreview = ({ stream }: VideoPreviewProps) => {
-  const videoRef = useRef<HTMLVideoElement | null>(null)
+const VideoPreview = ({ stream, videoRef }: VideoPreviewProps) => {
+  const [countDown, setCountDown] = useState(5)
 
   useEffect(() => {
-    if (videoRef.current && stream) {
+    if (videoRef?.current) {
       videoRef.current.srcObject = stream
     }
-  }, [stream])
 
-  if (!stream) {
-    return null
-  }
+    const interval = setInterval(() => {
+      setCountDown((prev) => {
+        if (prev <= 1) {
+          clearInterval(interval)
+          return 0
+        }
+
+        return prev - 1
+      })
+    }, 1000)
+
+    return () => {
+      clearInterval(interval)
+    }
+  }, [stream, videoRef])
 
   return (
     <Paper
@@ -26,6 +38,12 @@ const VideoPreview = ({ stream }: VideoPreviewProps) => {
         borderRadius: 3,
       }}
     >
+      <Typography variant='h6' sx={{ fontWeight: 600 }}>
+        Live Video Preview ({countDown}s)
+      </Typography>
+      <Typography variant='body2' color='text.secondary' sx={{ mb: 2 }}>
+        This is a live preview of the video stream.
+      </Typography>
       <video
         ref={videoRef}
         autoPlay

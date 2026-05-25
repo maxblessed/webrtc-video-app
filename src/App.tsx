@@ -3,13 +3,15 @@ import { useEffect, useRef } from 'react'
 
 import Instructions from './components/Instruction'
 import VideoPreview from './components/VideoPreview'
-import Snapshot from './components/Snapshots'
+import Snapshot from './components/Snapshot'
 import ErrorMessage from './components/ErrorMessage'
+
+import { captureSnapshot } from './utils'
 
 import { useCamera } from './hooks/useCamera'
 
 function App() {
-  const canvasRef = useRef<HTMLCanvasElement | null>(null)
+  const videoRef = useRef<HTMLVideoElement | null>(null)
 
   const {
     stream,
@@ -26,29 +28,22 @@ function App() {
     if (!stream) return
 
     const timer = setTimeout(() => {
-      const video = document.querySelector('video')
+      const video = videoRef.current
 
-      if (!video || !canvasRef.current) return
+      if (!video) return
 
-      const canvas = canvasRef.current
+      const image = captureSnapshot(video)
 
-      canvas.width = video.videoWidth
-      canvas.height = video.videoHeight
-
-      const context = canvas.getContext('2d')
-
-      if (!context) return
-
-      context.drawImage(video, 0, 0)
-
-      const image = canvas.toDataURL('image/png')
+      if (!image) return
 
       saveCapturedImage(image)
 
       stopCamera()
     }, 5000)
 
-    return () => clearTimeout(timer)
+    return () => {
+      clearTimeout(timer)
+    }
   }, [stream, saveCapturedImage, stopCamera])
 
   return (
@@ -65,13 +60,13 @@ function App() {
           hasStarted={hasStarted}
         />
 
-        <ErrorMessage message={error} />
+        {stream ? (
+          <VideoPreview stream={stream} videoRef={videoRef} />
+        ) : error ? (
+          <ErrorMessage message={error} />
+        ) : null}
 
-        <VideoPreview stream={stream} />
-
-        <Snapshot image={capturedImage} />
-
-        <canvas ref={canvasRef} style={{ display: 'none' }} />
+        {capturedImage && <Snapshot image={capturedImage} />}
       </Stack>
     </Container>
   )
