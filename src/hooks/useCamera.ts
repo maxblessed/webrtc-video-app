@@ -39,11 +39,7 @@ export const useCamera = () => {
   }, [])
 
   useEffect(() => {
-    return () => {
-      if (stream) {
-        stopMediaStream(stream)
-      }
-    }
+    return () => stopMediaStream(stream)
   }, [stream])
 
   return {

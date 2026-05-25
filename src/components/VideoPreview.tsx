@@ -38,7 +38,10 @@ const VideoPreview = ({ stream, videoRef }: VideoPreviewProps) => {
         borderRadius: 3,
       }}
     >
-      <Typography variant='h6' sx={{ fontWeight: 600 }}>
+      <Typography
+        variant='h6'
+        sx={{ fontWeight: 600, fontFamily: 'Inter, Roboto, sans-serif' }}
+      >
         Live Video Preview ({countDown}s)
       </Typography>
       <Typography variant='body2' color='text.secondary' sx={{ mb: 2 }}>
