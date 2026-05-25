@@ -1,7 +1,3 @@
-export const stopMediaStream = (stream: MediaStream | null) => {
-  stream?.getTracks().forEach((track) => track.stop())
-}
-
 export const captureSnapshot = (video: HTMLVideoElement) => {
   const canvas = document.createElement('canvas')
 

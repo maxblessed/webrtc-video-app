@@ -6,7 +6,7 @@ import VideoPreview from './components/VideoPreview'
 import Snapshot from './components/Snapshot'
 import ErrorMessage from './components/ErrorMessage'
 
-import { captureSnapshot } from './utils'
+import { captureSnapshot } from './helpers/captureSnapshot'
 
 import { useCamera } from './hooks/useCamera'
 

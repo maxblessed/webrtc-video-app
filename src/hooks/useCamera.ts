@@ -1,5 +1,5 @@
 import { useCallback, useEffect, useState } from 'react'
-import { stopMediaStream } from '../utils'
+import { stopMediaStream } from '../helpers/stopMediaStream'
 
 export const useCamera = () => {
   const [stream, setStream] = useState<MediaStream | null>(null)
