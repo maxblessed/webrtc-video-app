@@ -126,8 +126,6 @@ A short demo video showing:
 - live preview
 - automatic snapshot capture
 
-is included in this repository.
-
 Video Recording can be found here in demo folder:
 
 ```txt
