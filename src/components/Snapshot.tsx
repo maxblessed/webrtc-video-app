@@ -1,4 +1,4 @@
-import { Paper, Stack, Typography } from '@mui/material'
+import { Box, Stack, Typography } from '@mui/material'
 
 interface SnapshotProps {
   image: string
@@ -6,13 +6,7 @@ interface SnapshotProps {
 
 const Snapshot = ({ image }: SnapshotProps) => {
   return (
-    <Paper
-      elevation={2}
-      sx={{
-        p: 2,
-        borderRadius: 3,
-      }}
-    >
+    <Box>
       <Stack spacing={2}>
         <Typography variant='h6' sx={{ fontWeight: 600 }}>
           Captured Image
@@ -23,11 +17,12 @@ const Snapshot = ({ image }: SnapshotProps) => {
           alt='Captured snapshot'
           style={{
             width: '100%',
-            borderRadius: 12,
+            maxHeight: '500px',
+            objectFit: 'contain',
           }}
         />
       </Stack>
-    </Paper>
+    </Box>
   )
 }
 

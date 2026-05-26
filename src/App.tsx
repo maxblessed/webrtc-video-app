@@ -50,10 +50,10 @@ function App() {
     <Container
       maxWidth='md'
       sx={{
-        py: 6,
+        py: 2,
       }}
     >
-      <Stack spacing={4}>
+      <Stack spacing={2}>
         <Instructions
           onStart={startCamera}
           isLoading={isLoading}

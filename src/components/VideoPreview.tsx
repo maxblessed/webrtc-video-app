@@ -1,4 +1,4 @@
-import { Paper, Typography } from '@mui/material'
+import { Box, Typography } from '@mui/material'
 import { useEffect, useState } from 'react'
 
 interface VideoPreviewProps {
@@ -25,24 +25,20 @@ const VideoPreview = ({ stream, videoRef }: VideoPreviewProps) => {
       })
     }, 1000)
 
-    return () => {
-      clearInterval(interval)
-    }
+    return () => clearInterval(interval)
   }, [stream, videoRef])
 
   return (
-    <Paper
-      elevation={2}
+    <Box
       sx={{
         overflow: 'hidden',
         p: 2,
-        borderRadius: 3,
       }}
     >
       <Typography variant='h6' sx={{ fontWeight: 600 }}>
         Live Video Preview ({countDown}s)
       </Typography>
-      <Typography variant='body2' sx={{ mb: 2 }}>
+      <Typography variant='body2' sx={{ mb: 2, color: 'text.secondary' }}>
         This is a live preview of the video stream.
       </Typography>
       <video
@@ -52,10 +48,11 @@ const VideoPreview = ({ stream, videoRef }: VideoPreviewProps) => {
         muted
         style={{
           width: '100%',
-          display: 'block',
+          maxHeight: '500px',
+          objectFit: 'contain',
         }}
       />
-    </Paper>
+    </Box>
   )
 }
 
