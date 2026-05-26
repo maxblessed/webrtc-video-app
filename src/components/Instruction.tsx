@@ -25,7 +25,7 @@ const Instructions = ({
       <Typography
         variant='body1'
         sx={{
-          lineHeight: 1.7,
+          lineHeight: 1.2,
           color: 'text.secondary',
         }}
       >

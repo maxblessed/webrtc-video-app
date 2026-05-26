@@ -10,7 +10,7 @@ const VideoPreview = ({ stream, videoRef }: VideoPreviewProps) => {
   const [countDown, setCountDown] = useState(5)
 
   useEffect(() => {
-    if (videoRef?.current) {
+    if (videoRef.current) {
       videoRef.current.srcObject = stream
     }
 
@@ -29,18 +29,7 @@ const VideoPreview = ({ stream, videoRef }: VideoPreviewProps) => {
   }, [stream, videoRef])
 
   return (
-    <Box
-      sx={{
-        overflow: 'hidden',
-        p: 2,
-      }}
-    >
-      <Typography variant='h6' sx={{ fontWeight: 600 }}>
-        Live Video Preview ({countDown}s)
-      </Typography>
-      <Typography variant='body2' sx={{ mb: 2, color: 'text.secondary' }}>
-        This is a live preview of the video stream.
-      </Typography>
+    <Box>
       <video
         ref={videoRef}
         autoPlay
@@ -52,6 +41,12 @@ const VideoPreview = ({ stream, videoRef }: VideoPreviewProps) => {
           objectFit: 'contain',
         }}
       />
+      <Typography variant='h6' sx={{ fontWeight: 600, mt: 1 }}>
+        Live Video Preview ({countDown}s)
+      </Typography>
+      <Typography variant='body2' sx={{ mb: 1, color: 'text.secondary' }}>
+        This is a live preview of the video stream.
+      </Typography>
     </Box>
   )
 }
