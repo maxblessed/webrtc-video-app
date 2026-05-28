@@ -145,9 +145,7 @@ This project is deployed to:
 
 # Live Demo
 
-```txt
-https://webrtc-video-app-neon.vercel.app/
-```
+- Frontend: https://webrtc-video-app-neon.vercel.app/
 
 ---
 
