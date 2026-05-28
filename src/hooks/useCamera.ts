@@ -19,11 +19,8 @@ export const useCamera = () => {
 
       setStream(mediaStream)
       setHasStarted(true)
-
-      return mediaStream
     } catch {
       setError('Camera access denied or unavailable.')
-      return null
     } finally {
       setIsLoading(false)
     }
